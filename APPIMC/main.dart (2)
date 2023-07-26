@@ -1,0 +1,114 @@
+import 'package:flutter/material.dart';
+
+main() {
+  runApp(
+    MaterialApp(
+      home: Home(),
+    ),
+  );
+}
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  TextEditingController num1Controller = TextEditingController();
+  TextEditingController num2Controller = TextEditingController();
+
+  String _infoText = 'Resultado';
+  void _somar() {
+    setState(() {
+      int num1 = int.parse(num1Controller.text);
+      int num2 = int.parse(num2Controller.text);
+
+
+      int soma = num1 + num2;
+      
+      _infoText = "A soma entre $num1 e $num2 é $soma";
+    
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text(
+            "Calculadora Soma",
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.grey,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {},
+            )
+          ]),
+      backgroundColor: Colors.white,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Icon(
+            Icons.person_outline,
+            size: 120.0,
+            color: Colors.grey,
+          ),
+          TextField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              labelText: "Primeiro número",
+              labelStyle: TextStyle(
+                color: Colors.green,
+              ),
+            ),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.green,
+              fontSize: 25.0,
+            ),
+            controller: num1Controller,
+          ),
+          TextField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              labelText: "Segundo número",
+              labelStyle: TextStyle(
+                color: Colors.green,
+              ),
+            ),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.green,
+              fontSize: 25.0,
+            ),
+            controller: num2Controller,
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: 10,
+              bottom: 10,
+            ),
+            child: Container(
+              height: 50.0,
+              child: ElevatedButton(
+                onPressed: () {
+                  _somar();
+                },
+                child: Text(
+                  "Calcular",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25.0,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Text("$_infoText")
+        ],
+      ),
+    );
+  }
+}
